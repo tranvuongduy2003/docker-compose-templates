@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  # services
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_DEFAULT_USER}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbit_data:/data/db
+      - rabbit_log:/data/configdb
+
+# network section
+networks:
+  default:
+    name: my-network
+    driver: bridge
+
+# volumes section
+volumes:
+  rabbit_data:
+    name: rabbit_data
+  rabbit_log:
+    name: rabbit_log

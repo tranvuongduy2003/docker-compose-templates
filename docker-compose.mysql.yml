@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  # services
+  mysql:
+    image: mysql:8.0.29
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      MYSQL_TCP_PORT: 3306
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+# network section
+networks:
+  default:
+    name: my-network
+    driver: bridge
+
+# volumes section
+volumes:
+  mysql_data:
+    name: mysql_data

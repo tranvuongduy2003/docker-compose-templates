@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  # services
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000" # MinIO Console
+      - "9001:9001" # MinIO Admin Console
+    restart: always
+    volumes:
+      - minio_data:/data
+      - minio_config:/root/.minio
+    environment:
+      MINIO_ROOT_USER: "${MINIO_ROOT_USER}"
+      MINIO_ROOT_PASSWORD: "${MINIO_ROOT_PASSWORD}"
+    command: server /data --console-address ":9001"
+
+# network section
+networks:
+  default:
+    name: my-network
+    driver: bridge
+
+# volumes section
+volumes:
+  minio_data:
+    name: minio_data
+  minio_config:
+    name: minio_config

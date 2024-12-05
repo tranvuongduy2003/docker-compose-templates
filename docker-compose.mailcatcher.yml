@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  # services
+  mailcatcher:
+    image: dockage/mailcatcher:0.9.0
+    container_name: mailcatcher
+    restart: always
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+
+# network section
+networks:
+  default:
+    name: my-network
+    driver: bridge

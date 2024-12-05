@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  # services
+  redis:
+    image: redis:7.0.15-alpine
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+# network section
+networks:
+  default:
+    name: my-network
+    driver: bridge
+
+# volumes section
+volumes:
+  redis_data:
+    name: redis_data

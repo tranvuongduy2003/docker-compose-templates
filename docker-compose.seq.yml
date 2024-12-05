@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  # services
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "5341:5341"
+      - "8001:80"
+    volumes:
+      - seq_data:/data
+
+# network section
+networks:
+  default:
+    name: my-network
+    driver: bridge
+
+# volumes section
+volumes:
+  seq_data:
+    name: seq_data

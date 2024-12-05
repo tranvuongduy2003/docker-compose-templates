@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  # services
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      MSSQL_SA_PASSWORD: "${MSSQL_PASSWORD}"
+      ACCEPT_EULA: "Y"
+    restart: always
+    volumes:
+      - sqlserver_data:/var/lib/sqlserver/data
+    ports:
+      - "1433:1433"
+
+# network section
+networks:
+  default:
+    name: my-network
+    driver: bridge
+
+# volumes section
+volumes:
+  sqlserver_data:
+    name: sqlserver_data
